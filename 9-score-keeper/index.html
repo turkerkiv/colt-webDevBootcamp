@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Keeper</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <section id="scoreKeeperSect">
+        <section id="imgSect">
+            <img
+                src="https://images.unsplash.com/photo-1611762348135-5b09d2f0390d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+        </section>
+        <section id="nameSect">
+            <p><b>Ping Pong Score Keeper</b></p>
+        </section>
+        <section id="infoSect">
+            <section id="scoreSect">
+                <h2><span id="p1-score">0</span> to <span id="p2-score">0</span></h2>
+            </section>
+            <section id="hintSect">
+                <p>Use the buttons below to keep score.</p>
+            </section>
+            <section id="fnshPointSect">
+                <label for="finishPoint"><b>Playing To</b></label>
+                <select name="finishPoint" id="finishPoint">
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+            </section>
+        </section>
+        <section id="btnSect">
+            <button class="btn btn-p1">+1 Player One</button>
+            <button class="btn btn-p2">+1 Player Two</button>
+            <button class="btn btn-reset">Reset</button>
+        </section>
+    </section>
+    <script src="app.js"></script>
+</body>
+
+</html>

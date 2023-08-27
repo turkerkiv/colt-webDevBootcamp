@@ -1,0 +1,9 @@
+div {
+    width: 100%;
+    text-align: center;
+}
+
+button {
+    font-size: 1rem;
+    padding: 1em 1.5em;
+}

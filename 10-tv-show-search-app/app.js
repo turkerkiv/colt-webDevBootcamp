@@ -1,25 +1,23 @@
 const apiBaseUrl = "https://api.tvmaze.com/search/shows";
 const searchButton = document.querySelector("#searchButton");
 const queryInput = document.querySelector("#queryInput");
-const inp = document.querySelector("input");
+const resultSection = document.querySelector("#resultSection");
 
 const getSearchResults = async () => {
     let finalUrl = apiBaseUrl + `?q=${queryInput.value}`;
     try {
         const result = await axios.get(finalUrl);
-        console.log(result.data[0].show);
+        return result.data;
     }
     catch (e) {
         console.log("ERROR!", e);
     }
 }
 
-searchButton.addEventListener("click", getSearchResults);
-
 //card append them into section.
 //maybe summary rating name and img is enough. And maybe click on card is gonna open the link.
 
-const createCard = data => {
+const createCard = tvShow => {
     const cardContainerE = document.createElement("div");
 
     const imgE = document.createElement("img");
@@ -28,21 +26,31 @@ const createCard = data => {
     const ratingE = document.createElement("p");
     const summaryE = document.createElement("p");
 
-    ratingE.append(nameE);
-    ratingE.append(ratingE);
+    ratingContainerE.append(nameE);
+    ratingContainerE.append(ratingE);
     cardContainerE.append(imgE);
     cardContainerE.append(ratingContainerE);
     cardContainerE.append(summaryE);
 
-    imgE.src = data.show.image.medium;
-    ratingE.innerText = data.show.rating.average;
-    nameE.innerText = data.show.name;
-    summaryE.innerText = data.show.summary;
-    cardContainerE.addEventListener("click", () => { window.open(data.show.originalSite, "_blank") });
+    const show = tvShow.show;
+
+    imgE.src = show.image === null ? "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png" : show.image.medium;
+    ratingE.innerText = show.rating.average;
+    nameE.innerText = show.name;
+    summaryE.innerHTML = show.summary;
+    cardContainerE.addEventListener("click", () => { window.open(show.url, "_blank") });
 
     //adding style classes to appropiate elements
     return cardContainerE;
 }
+
+const displayResults = async () => {
+    const results = await getSearchResults();
+    console.log(results);
+    results.forEach(tvShow => resultSection.append(createCard(tvShow)));
+}
+
+searchButton.addEventListener("click", displayResults);
 
 {/* <div id="showCard" class="showCard">
     <img id="showImg" src="">

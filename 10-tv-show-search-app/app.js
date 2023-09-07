@@ -31,6 +31,8 @@ const createCard = tvShow => {
     const ratingE = document.createElement("p");
     const summaryE = document.createElement("p");
 
+    ratingE.innerHTML = "<sup>Rating: </sup>";
+
     detailsContainerE.append(nameE);
     detailsContainerE.append(ratingE);
     detailsContainerE.append(summaryE);
@@ -43,11 +45,11 @@ const createCard = tvShow => {
     const show = tvShow.show;
 
     imgE.src = show.image === null ? "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png" : show.image.medium;
-    ratingE.innerText = show.rating.average === null ? "N/A" : show.rating.average;
-    nameE.innerText = show.name;
+    ratingE.innerHTML += show.rating.average === null ? "N/A" : show.rating.average;
+    nameE.innerText += show.name;
 
     let sumWithoutElements = show.summary === null ? "N/A" : show.summary === "" ? "N/A" : show.summary.replace(/<[^>]*>/g, '');
-    summaryE.innerText = sumWithoutElements.length > 200 ? sumWithoutElements.slice(0, 197) + "..." : sumWithoutElements;
+    summaryE.innerText += sumWithoutElements.length > 200 ? sumWithoutElements.slice(0, 197) + "..." : sumWithoutElements;
 
     showCardE.addEventListener("click", () => { window.open(show.url, "_blank") });
 

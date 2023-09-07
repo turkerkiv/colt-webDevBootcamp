@@ -144,6 +144,10 @@ h2 {
     margin: 2%;
 }
 
+body {
+    background-color: #F4EEEE;
+}
+
 #entryHeader {
     margin: 7% auto;
     display: flex;
@@ -172,7 +176,9 @@ h2 {
     flex-direction: row;
     margin: 3% 0;
     width: 100%;
+    background-color: #d5d3d3;
     transition: .25s;
+    box-shadow: 5px 5px 5px 1px rgba(128, 128, 128, 0.295);
 }
 
 .showCard:hover {
@@ -199,5 +205,14 @@ h2 {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border: 0.01rem solid rgba(128, 128, 128, 0.319);
+    border-bottom: 0.06em solid rgba(0, 0, 0, 0.133);
+}
+
+.showCardDetails p:last-of-type {
+    border: none;
+}
+
+sup {
+    font-size: 1rem;
+    padding-right: .5rem;
 }

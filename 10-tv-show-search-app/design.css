@@ -167,15 +167,18 @@ h2 {
     margin: 5% 25%;
 }
 
-#resultSection:hover {
-    cursor: pointer;
-}
-
 .showCard {
     display: flex;
     flex-direction: row;
     margin: 3% 0;
     width: 100%;
+    transition: .25s;
+}
+
+.showCard:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0px 5px 20px 5px rgba(128, 128, 128, 0.295);
 }
 
 .showCard img {

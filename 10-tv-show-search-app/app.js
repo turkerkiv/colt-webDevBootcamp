@@ -35,9 +35,9 @@ const createCard = tvShow => {
     const show = tvShow.show;
 
     imgE.src = show.image === null ? "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png" : show.image.medium;
-    ratingE.innerText = show.rating.average;
+    ratingE.innerText = show.rating.average === null ? "N/A" : show.rating.average;
     nameE.innerText = show.name;
-    summaryE.innerHTML = show.summary;
+    summaryE.innerHTML = show.summary.length > 200 ? show.summary.slice(0, 197) + "..." : show.summary;
     cardContainerE.addEventListener("click", () => { window.open(show.url, "_blank") });
 
     //adding style classes to appropiate elements

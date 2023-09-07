@@ -70,6 +70,8 @@ const displayResults = async () => {
 
     console.log(results);
     results.forEach(tvShow => resultSection.append(createCard(tvShow)));
+
+    queryInput.value = "";
 }
 
 searchButton.addEventListener("click", displayResults);

@@ -3,6 +3,12 @@ const searchButton = document.querySelector("#searchButton");
 const queryInput = document.querySelector("#queryInput");
 const resultSection = document.querySelector("#resultSection");
 
+queryInput.addEventListener("keyup", event => {
+    if (event.key === "Enter") {
+        searchButton.click();
+    }
+})
+
 const getSearchResults = async () => {
     let finalUrl = apiBaseUrl + `?q=${queryInput.value}`;
     try {
@@ -13,7 +19,6 @@ const getSearchResults = async () => {
         console.log("ERROR!", e.message);
     }
 }
-
 //card append them into section.
 //maybe summary rating name and img is enough. And maybe click on card is gonna open the link.
 
@@ -58,6 +63,11 @@ const clearResults = () => {
 const displayResults = async () => {
     clearResults();
     const results = await getSearchResults();
+
+    const resultHeader = document.createElement("h2");
+    resultHeader.innerText = results.length === 0 ? "Nothing found. Please try another words." : `Found ${results.length} tv shows. Enjoy the show.`
+    resultSection.append(resultHeader);
+
     console.log(results);
     results.forEach(tvShow => resultSection.append(createCard(tvShow)));
 }

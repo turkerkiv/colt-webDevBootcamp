@@ -10,7 +10,7 @@ const getSearchResults = async () => {
         return result.data;
     }
     catch (e) {
-        console.log("ERROR!", e);
+        console.log("ERROR!", e.message);
     }
 }
 
@@ -21,23 +21,23 @@ const createCard = tvShow => {
     const cardContainerE = document.createElement("div");
 
     const imgE = document.createElement("img");
-    const ratingContainerE = document.createElement("div");
+    const detailsContainerE = document.createElement("div");
     const nameE = document.createElement("p");
     const ratingE = document.createElement("p");
     const summaryE = document.createElement("p");
 
-    ratingContainerE.append(nameE);
-    ratingContainerE.append(ratingE);
+    detailsContainerE.append(nameE);
+    detailsContainerE.append(ratingE);
+    detailsContainerE.append(summaryE);
     cardContainerE.append(imgE);
-    cardContainerE.append(ratingContainerE);
-    cardContainerE.append(summaryE);
+    cardContainerE.append(detailsContainerE);
 
     const show = tvShow.show;
 
     imgE.src = show.image === null ? "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png" : show.image.medium;
     ratingE.innerText = show.rating.average === null ? "N/A" : show.rating.average;
     nameE.innerText = show.name;
-    summaryE.innerHTML = show.summary.length > 200 ? show.summary.slice(0, 197) + "..." : show.summary;
+    summaryE.innerHTML = show.summary === null ? "N/A" : show.summary.length > 200 ? show.summary.slice(0, 197) + "..." : show.summary;
     cardContainerE.addEventListener("click", () => { window.open(show.url, "_blank") });
 
     //adding style classes to appropiate elements
@@ -54,10 +54,10 @@ searchButton.addEventListener("click", displayResults);
 
 {/* <div id="showCard" class="showCard">
     <img id="showImg" src="">
-    <div id="rating">
+    <div id="details">
         <p id="showName"></p>
         <p id="rating"></p>
+        <p id="summary"></p>
     </div>
-    <p id="summary"></p>
 </div> */}
 

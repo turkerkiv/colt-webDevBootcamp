@@ -5,21 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TV Show Searching App</title>
+    <link rel="stylesheet" href="design.css">
 </head>
 
 <body>
-    <!-- 1 search input at the top. 
-        1 img container card for getting app. 
-        1 img container card for a random movie suggestion. -->
-    <header>
-        <h1>TV Show Searcher</h1>
+    <header id="entryHeader">
+        <h1 id="headline">TV Show Searcher</h1>
+        <div id="inputContainer">
+            <input class="input" id="queryInput" type="text" name="query">
+            <button class="input" id="searchButton">&#128270;</button>
+        </div>
     </header>
     <main>
-        <section>
-            <label for="queryInput">Enter the name</label>
-            <input id="queryInput" type="text" name="query">
-            <button id="searchButton">&#128270;</button>
-        </section>
         <section id="resultSection">
 
         </section>

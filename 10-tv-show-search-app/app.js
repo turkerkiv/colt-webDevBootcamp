@@ -18,7 +18,7 @@ const getSearchResults = async () => {
 //maybe summary rating name and img is enough. And maybe click on card is gonna open the link.
 
 const createCard = tvShow => {
-    const cardContainerE = document.createElement("div");
+    const showCardE = document.createElement("div");
 
     const imgE = document.createElement("img");
     const detailsContainerE = document.createElement("div");
@@ -29,22 +29,34 @@ const createCard = tvShow => {
     detailsContainerE.append(nameE);
     detailsContainerE.append(ratingE);
     detailsContainerE.append(summaryE);
-    cardContainerE.append(imgE);
-    cardContainerE.append(detailsContainerE);
+    showCardE.append(imgE);
+    showCardE.append(detailsContainerE);
+
+    detailsContainerE.classList.add("showCardDetails");
+    showCardE.classList.add("showCard");
 
     const show = tvShow.show;
 
     imgE.src = show.image === null ? "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png" : show.image.medium;
     ratingE.innerText = show.rating.average === null ? "N/A" : show.rating.average;
     nameE.innerText = show.name;
-    summaryE.innerHTML = show.summary === null ? "N/A" : show.summary.length > 200 ? show.summary.slice(0, 197) + "..." : show.summary;
-    cardContainerE.addEventListener("click", () => { window.open(show.url, "_blank") });
 
-    //adding style classes to appropiate elements
-    return cardContainerE;
+    let sumWithoutElements = show.summary === null ? "N/A" : show.summary === "" ? "N/A" : show.summary.replace(/<[^>]*>/g, '');
+    summaryE.innerText = sumWithoutElements.length > 200 ? sumWithoutElements.slice(0, 197) + "..." : sumWithoutElements;
+
+    showCardE.addEventListener("click", () => { window.open(show.url, "_blank") });
+
+    return showCardE;
+}
+
+const clearResults = () => {
+    while (resultSection.firstChild) {
+        resultSection.removeChild(resultSection.firstChild);
+    }
 }
 
 const displayResults = async () => {
+    clearResults();
     const results = await getSearchResults();
     console.log(results);
     results.forEach(tvShow => resultSection.append(createCard(tvShow)));
@@ -52,12 +64,14 @@ const displayResults = async () => {
 
 searchButton.addEventListener("click", displayResults);
 
-{/* <div id="showCard" class="showCard">
-    <img id="showImg" src="">
-    <div id="details">
-        <p id="showName"></p>
-        <p id="rating"></p>
-        <p id="summary"></p>
-    </div>
-</div> */}
+// <div id="showCard" class="showCard">
+//     <img id="showImg" src="https://static.tvmaze.com/images/no-img/no-img-portrait-text.png">
+//         <div id="showCardDetails" class="showCardDetails">
+//             <p id="showName">Test name</p>
+//             <p id="rating">7.8</p>
+//             <p id="summary">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem quae minima unde
+//                 distinctio eius ab, inventore quibusdam soluta aut debitis rem, laboriosam nobis est quod
+//                 doloremque commodi voluptatem, dolorum saepe?</p>
+//         </div>
+// </div>
 
